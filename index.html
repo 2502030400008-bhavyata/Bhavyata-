@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple AI Chatbot</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #eaf2ff;
+            text-align: center;
+            padding: 30px;
+        }
+        .chatbox {
+            background: white;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        #messages {
+            height: 250px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        input {
+            padding: 10px;
+            width: 65%;
+        }
+        button {
+            padding: 10px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chatbox">
+    <h2>🤖 My AI Chatbot</h2>
+
+    <div id="messages">
+        <p><b>AI:</b> Hello! How can I help you?</p>
+    </div>
+
+    <input id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+function sendMessage() {
+    let input = document.getElementById("userInput");
+    let message = input.value.trim();
+    let box = document.getElementById("messages");
+
+    if (message === "") return;
+
+    box.innerHTML += "<p><b>You:</b> " +
+        message.replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;") + "</p>";
+
+    let reply = "Sorry, I don't understand. Please ask something else.";
+    let text = message.toLowerCase();
+
+    if (text.includes("hello") || text.includes("hi")) {
+        reply = "Hello! 😊 How are you?";
+    } else if (text.includes("name")) {
+        reply = "I am your simple AI chatbot!";
+    } else if (text.includes("how are you")) {
+        reply = "I am fine! How can I help you?";
+    } else if (text.includes("help")) {
+        reply = "Sure! Tell me what you need help with.";
+    } else if (text.includes("bye")) {
+        reply = "Goodbye! Have a nice day! 👋";
+    }
+
+    box.innerHTML += "<p><b>AI:</b> " + reply + "</p>";
+    input.value = "";
+    box.scrollTop = box.scrollHeight;
+}
+</script>
+
+</body>
+</html>
